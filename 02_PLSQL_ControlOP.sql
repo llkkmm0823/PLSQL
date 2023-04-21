@@ -206,3 +206,70 @@ begin
     end loop;
 end;
 
+SET SERVEROUTPUT ON
+-- continue 문
+declare 
+    vn_base_num number := 9;
+    begin
+    for i in 1..9
+    loop
+        continue when i = 5;        --조건이 충족하면 반복실행 영역중 나머지 명령을 실행하지 않고 다음 반복으로 진행
+        dbms_output.put_line(vn_base_num || 'x' || i || '=' || vn_base_num * i ) ;
+    end loop;
+end;
+
+
+--GOTO문
+declare
+    vn_base_num number := 5;
+begin
+    <<fifth>>  --라벨 , go to 문의 이동 목적지로 사용됨
+     for i in 1..9
+    loop
+        dbms_output.put_line(vn_base_num || 'x' || i || '=' || vn_base_num * i ) ;
+    if i = 3 then
+        goto sixth;
+        end if;
+    end loop;
+    <<sixth>>
+    vn_base_num := 6;
+    for i in 1..9
+    loop
+        dbms_output.put_line(vn_base_num || 'x' || i || '=' || vn_base_num * i ) ;
+end loop;
+end;
+
+
+
+--NULL문 :  if문 또는 case when 등에서 해당하는 경우에 실행해야할 명령이 하나도 없을 때 쓰는 구문
+
+--if vn_variable = 'A' then
+--    처리로직 1;
+--if vn_variable = 'B' then
+--    처리로직 2;
+--else
+--        null;
+--end if;
+--
+--case when vn_variable = 'A' then
+--                처리로직 1;
+--       when vn_variable = 'B' then
+--                처리로직 2;
+--       else
+--            null;
+--end case;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
